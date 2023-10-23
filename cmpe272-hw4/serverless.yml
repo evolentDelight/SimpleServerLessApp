@@ -3,8 +3,14 @@ app: cmpe272-hw4
 service: cmpe272-hw4
 frameworkVersion: '3'
 
+plugins:
+  - serverless-plugin-common-excludes 
+  - serverless-plugin-include-dependencies
+
 custom:
   tableName: 'users-table-${sls:stage}'
+  includeDependencies:
+    enableCaching: true
 
 provider:
   name: aws
@@ -44,3 +50,5 @@ resources:
             KeyType: HASH
         BillingMode: PAY_PER_REQUEST
         TableName: ${self:custom.tableName}
+
+
